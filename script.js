@@ -8,28 +8,32 @@ function createGrid(pixels = 16){
         const square = document.createElement('div');
         square.style.width = `${dimensions}%`;
         square.style.height = `${dimensions}%`;
-        square.style.backgroundColor = "black";
+        square.style.backgroundColor = "white";
+        square.style.borderColor = 'grey';
         container.appendChild(square);
     }
     // After creating the grid Divs, apply hover effect
     squareHover();
-    squareShade();
 };
 
-function squareHover(){
+function squareHover(color = "Black"){
     const squares = document.querySelectorAll('.square-container div');
     squares.forEach(square => square.addEventListener('mouseenter', () => {
-        let r = rngHex();
-        let g = rngHex();
-        let b = rngHex();
-        console.log(r, g, b);
-        square.style.backgroundColor = `rgb(${r},${g},${b})`;
+        if(color == "Rainbow"){
+            let r = rngHex();
+            let g = rngHex();
+            let b = rngHex();
+            square.style.backgroundColor = `rgb(${r},${g},${b})`;
+        }
+        else if (color == "Black"){
+            square.style.backgroundColor = "Black";
+        }
         }));
 };
 
 
-const button = document.querySelector('button');
-button.addEventListener('click', setGrid); 
+//const button = document.querySelector('button');
+//button.addEventListener('click', setGrid); 
 
 function setGrid(){
     let val = prompt('Pixel Grid: ','');
@@ -60,6 +64,11 @@ function removeGrid(){
 
 function rngHex(){
     return Math.floor(Math.random() * 256);
+}
+
+function clearGrid(){
+    const squares = document.querySelectorAll('.square-container div');
+    squares.forEach(square => square.style.backgroundColor = "white");
 }
 
 
